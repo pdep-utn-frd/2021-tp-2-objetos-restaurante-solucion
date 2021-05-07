@@ -2,7 +2,6 @@ import casasDeComidas.*
 import platos.*
 
 object jurado {
-	
 	method mejorCasaDeComida() {
 		return paris.casasDeComidas().max{casa => casa.puntaje()}
 	}
@@ -24,8 +23,7 @@ object paris {
 object gobierno {
 	const casasDeComidas = paris.casasDeComidas()
 	
-	// el gobierno decreta pandemia y obliga a todos los restaurantes a tomar medidas
-	method pandemia(){
+	method pandemia(){ 	// El Gobierno decreta pandemia y obliga a todos los restaurantes a tomar medidas.
 		casasDeComidas.forEach({casa => casa.porPandemia()})
 	}
 }

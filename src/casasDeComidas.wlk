@@ -6,8 +6,8 @@ import concurso.*
 object finoli {
 	const chefsContratados = [cristof, donato]
 	var chefPrincipal = cristof
-	const platoDelDia = chefPrincipal.especialidad()
-	const valoraciones = []
+	var platoDelDia = chefPrincipal.especialidad()
+	const valoraciones = [4,2]
 	
 	method contratar(nuevoChef) {
 		chefsContratados.add(nuevoChef)
@@ -15,6 +15,7 @@ object finoli {
 	
 	method cambiarChefPrincipal(chef) {
 		chefPrincipal = chef
+		platoDelDia = chefPrincipal.especialidad()
 	}
 	
 	method agregarValoracion(valoracion) {
@@ -31,14 +32,19 @@ object finoli {
 		return valoraciones.sum() / valoraciones.size()
 	}
 	
-	method tieneAlgunPlatoParCeliacos() {
-		platoDelDia.esAptoParaCeliacos()
+	method tieneAlgunPlatoParaCeliacos() {
+		return platoDelDia.esAptoParaCeliacos()
+	}
+	
+	method platoDelDia() {
+		return platoDelDia
 	}
 	
 	method porPandemia() { 
 		// Finoli cierra sus puertas y no puede hacer delivery por un caso positivo
 		// En consecuencia pierde todas su valoraciones.
 		valoraciones.clear()
+		self.agregarValoracion(1) // para probar test
 	}
 }
 
@@ -59,8 +65,8 @@ object bodegon {
 		menu.add(unPlato)
 	}
 	
-	method tieneAlgunPlatoParCeliacos() {
-		menu.any{plato => plato.esAptoParaCeliacos()}
+	method tieneAlgunPlatoParaCeliacos() {
+		return menu.any{plato => plato.esAptoParaCeliacos()}
 	}
 	
 	method porPandemia(){ // Vende solo pizza por delivery, siendo ahora este su peor plato
@@ -86,7 +92,7 @@ object mcDelta {
 		return 5.min(clientes/1000)
 	}
 	
-	method tieneAlgunPlatoParCeliacos() {
+	method tieneAlgunPlatoParaCeliacos() {
 		return hamburguesa.esAptoParaCeliacos()
 	}
 	
@@ -102,12 +108,12 @@ object puestoCallejero {
 		return pancho.puntaje()
 	}
 	
-	method tieneAlgunPlatoParCeliacos() {
+	method tieneAlgunPlatoParaCeliacos() {
 		return plato.esAptoParaCeliacos()
 	}
 	
 	method porPandemia() { // No puede seguir trabajando.
-		plato = ninguno
+		plato = ninguno // Creo un objeto "ninguno" para que todo siga funcionando.
 	}
 }
 
@@ -117,10 +123,10 @@ object cristof {method especialidad() = ratatouille}
 
 object donato {method especialidad() = tallarines}
 
-object damian { // Punto 6
+object damian { // Chef extra - punto 6
 	const platos = [tallarines, hamburguesa, ratatouille]
 	
 	method especialidad() {
-		return platos.anyOne()
+		return platos.anyOne() // Toma como especialidad algun plato de la lista de forma aleatoria.
 	}
 }

@@ -95,7 +95,6 @@ object matambreALaPizza {
 	}
 	
 	method esAptoParaCeliacos() = true
-		
 }
 
 object carneVacuna {

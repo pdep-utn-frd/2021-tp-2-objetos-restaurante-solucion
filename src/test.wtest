@@ -1,0 +1,67 @@
+import casasDeComidas.*
+import concurso.*
+import platos.*
+
+describe "Casas de comidas" {
+	
+	test "Inicialmente el plato del dia de finoli es ratatouille " {
+	assert.equals(ratatouille, finoli.platoDelDia())
+	}
+	
+	test "Con las condiciones iniciales el puntaje de finoli es 10" {
+	assert.equals(10, finoli.puntaje())
+	}
+	
+	test "Con las condiciones iniciales el puntaje del bodegon es 16" {
+	assert.equals(16, bodegon.puntaje())
+	}
+	
+	test "Con las condiciones iniciales el puntaje de mc delta es  " {
+	assert.equals(11.5, mcDelta.puntaje())
+	}
+	
+	test "Si el chef principal es donato el plato del dia es " {
+		finoli.cambiarChefPrincipal(donato)
+		assert.equals(tallarines, finoli.platoDelDia())
+	}
+	
+	test "Inicialmente finoli tiene algun plato apto para celiacos" {
+		assert.that(finoli.tieneAlgunPlatoParaCeliacos())
+	}
+	
+	test "En condiciones iniciales el peor plato del bodegon son los tallarines" {
+		assert.equals(tallarines, bodegon.peorPlato())
+	}
+	
+	test "Si mc Delta llega a tener 5000 clientes su puntaje es 15" {
+		mcDelta.cantidadDeClientes(5000)
+		assert.equals(15,mcDelta.puntaje())
+	}
+}
+
+describe "Concurso" {
+	
+	test "Con las condiciones iniciales el Ganador del concurso es el bodegon" {
+	assert.equals(bodegon, jurado.mejorCasaDeComida())
+	}
+	
+	test "Si el gobierno decreta pandemia el Ganador del concurso es el mc delta" {
+	gobierno.pandemia()
+	assert.equals(mcDelta, jurado.mejorCasaDeComida())
+	}
+	
+	test "Si el Gobierno decreta pandemia el puntaje de finoli pasa a ser 8" {
+		gobierno.pandemia()
+		assert.equals(8,finoli.puntaje())
+	}
+	
+	test "Si el Gobierno decreta pandemia el puntaje del bodegon pasa a ser 10" {
+		gobierno.pandemia()
+		assert.equals(10,bodegon.puntaje())
+	}
+	
+	test "Si el Gobierno decreta pandemia el puntaje de mc delta pasa a ser 11" {
+		gobierno.pandemia()
+		assert.equals(11,mcDelta.puntaje())
+	}
+}
