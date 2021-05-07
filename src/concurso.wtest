@@ -1,0 +1,14 @@
+import concurso.*
+
+test "el puntaje de las papas fritas es 3" {
+	// arreglar este test!
+	assert.equals(3, papasfritas.puntaje())
+}
+
+test "el puntaje de finoli es 14" {
+	// en paris hay sol
+	// las puntuaciones recibidas son 3, 4 y 5
+	// el chef principal es cristof
+	// el plato tipico de francia es ratatouille
+	assert.equals(10 + 4, finoli.puntaje())
+} 
