@@ -42,26 +42,26 @@ describe "Casas de comidas" {
 describe "Concurso" {
 	
 	test "Con las condiciones iniciales el Ganador del concurso es el bodegon" {
-	assert.equals(bodegon, jurado.mejorCasaDeComida())
+	assert.equals(bodegon, concurso.mejorCasaDeComida())
 	}
 	
 	test "Si el gobierno decreta pandemia el Ganador del concurso es el mc delta" {
-	gobierno.pandemia()
-	assert.equals(mcDelta, jurado.mejorCasaDeComida())
+	concurso.pandemia()
+	assert.equals(mcDelta, concurso.mejorCasaDeComida())
 	}
 	
 	test "Si el Gobierno decreta pandemia el puntaje de finoli pasa a ser 8" {
-		gobierno.pandemia()
+		concurso.pandemia()
 		assert.equals(8,finoli.puntaje())
 	}
 	
 	test "Si el Gobierno decreta pandemia el puntaje del bodegon pasa a ser 10" {
-		gobierno.pandemia()
+		concurso.pandemia()
 		assert.equals(10,bodegon.puntaje())
 	}
 	
 	test "Si el Gobierno decreta pandemia el puntaje de mc delta pasa a ser 11" {
-		gobierno.pandemia()
+		concurso.pandemia()
 		assert.equals(11,mcDelta.puntaje())
 	}
 }

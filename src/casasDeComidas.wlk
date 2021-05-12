@@ -6,7 +6,7 @@ import concurso.*
 object finoli {
 	const chefsContratados = [cristof, donato]
 	var chefPrincipal = cristof
-	var platoDelDia = chefPrincipal.especialidad()
+	
 	const valoraciones = [4,2]
 	
 	method contratar(nuevoChef) {
@@ -15,17 +15,14 @@ object finoli {
 	
 	method cambiarChefPrincipal(chef) {
 		chefPrincipal = chef
-		platoDelDia = chefPrincipal.especialidad()
 	}
 	
 	method agregarValoracion(valoracion) {
-		if (valoracion.between(0,5)){
-			valoraciones.add(valoracion)
-		}
+		valoraciones.add(valoracion)
 	}
 	
 	method puntaje() {
-		return platoDelDia.puntaje() + self.promDeValoraciones()
+		return self.platoDelDia().puntaje() + self.promDeValoraciones()
 		}
 	
 	method promDeValoraciones() {
@@ -33,11 +30,11 @@ object finoli {
 	}
 	
 	method tieneAlgunPlatoParaCeliacos() {
-		return platoDelDia.esAptoParaCeliacos()
+		return self.platoDelDia().esAptoParaCeliacos()
 	}
 	
 	method platoDelDia() {
-		return platoDelDia
+		return chefPrincipal.especialidad()
 	}
 	
 	method porPandemia() { 
@@ -49,7 +46,7 @@ object finoli {
 }
 
 object bodegon {
-	var menu = [matambreALaPizza, milanesaNapolitana, tallarines]
+	const menu = [matambreALaPizza, milanesaNapolitana, tallarines]
 	
 	method menu() = menu
 	
@@ -70,7 +67,7 @@ object bodegon {
 	}
 	
 	method porPandemia(){ // Vende solo pizza por delivery, siendo ahora este su peor plato
-		menu = [] 
+		menu.clear()
 		self.agregarPlato(pizza) 
 	}
 }
@@ -102,26 +99,36 @@ object mcDelta {
 }
 
 object puestoCallejero {
-	var plato = pancho
-	
 	method puntaje(){
 		return pancho.puntaje()
 	}
 	
-	method tieneAlgunPlatoParaCeliacos() {
-		return plato.esAptoParaCeliacos()
-	}
-	
-	method porPandemia() { // No puede seguir trabajando.
-		plato = ninguno // Creo un objeto "ninguno" para que todo siga funcionando.
-	}
+	method porPandemia() { } // Ignora la pandemia y sigue trabajando como si nada.
 }
 
 /** Chefs **/
 
-object cristof {method especialidad() = ratatouille}
+object cristof {
+	method especialidad() = paris.platoTipico()
+}
 
-object donato {method especialidad() = tallarines}
+object donato {
+	method especialidad() = tallarines
+}
+
+object paris {
+	var clima = "soleado"
+	var platoTipico = ratatouille
+	method platoTipico() = platoTipico
+	method platoTipico(nuevo){
+		platoTipico = nuevo
+	}
+	method clima() = clima
+	method clima(nuevoClima) {
+		clima = nuevoClima
+	}
+	
+}
 
 object damian { // Chef extra - punto 6
 	const platos = [tallarines, hamburguesa, ratatouille]

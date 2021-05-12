@@ -24,10 +24,7 @@ object hamburguesa {
 	}
 	
 	method adicional() {
-		if (ingredientes.contains('queso'))
-			return 1
-		else
-			return 0
+		return if (ingredientes.contains('queso')) 1 else 0
 	}
 	
 	method agregarIngrediente(ingre) {
@@ -70,13 +67,10 @@ object pure {
 	var tieneManteca = false
 	
 	method puntaje() {
-		if (tieneManteca)
-			return 2
-		else
-			return 1
+		return if (tieneManteca) 2 else 1
 	}
 	
-	method agregarle(manteca) {
+	method agregarleManteca() {
 		tieneManteca = true
 	}
 	
@@ -86,9 +80,7 @@ object pure {
 object matambreALaPizza {
 	var tipoDeCarne = carneVacuna
 	
-	method puntaje(){
-		return carneVacuna.puntaje() + 2
-		}
+	method puntaje() = tipoDeCarne.puntaje() + 2
 	
 	method cambiarTipoDeCarne(otroTipoDeCarne) {
 		tipoDeCarne = otroTipoDeCarne
@@ -116,30 +108,13 @@ object carneCerdo {
 }
 
 object pancho {
-	var aderezo = true
 	
-	method esAptoParaCeliacos() = false
-	
-	method puntaje() {
-		if (aderezo) 
-			return 2
-		else
-			return 1
-	}
-	
-	method quitarAderezo() {
-		aderezo = false
-	}
+	method puntaje() = 1
+
 }
 
 object pizza{
 	method puntaje() = 5
-	
-	method esAptoParaCeliacos() = false
-}
-
-object ninguno {
-	method puntaje() = 0
 	
 	method esAptoParaCeliacos() = false
 }
